@@ -1,6 +1,8 @@
 package lobby;
 
 import core.CoreBungeeCordClient;
+import core.CoreSendStringPacket;
+import core.Utils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -43,21 +45,17 @@ public class LobbyEventHandler implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
 
+        CoreSendStringPacket.sendPacketToTitle(e.getPlayer(), Utils.colorize("&3Moin"), Utils.colorize(e.getPlayer().getDisplayName()));
+        CoreSendStringPacket.sendPacketToHotbar(e.getPlayer(), Utils.colorize("Wilkommen auf &3PMFRTT-Networks&f!"));
+
         main.portalTimer.put(e.getPlayer().getDisplayName(), 5);
         Player player = e.getPlayer();
         player.teleport(new Location(Bukkit.getWorld("world"), -40, 21, 88));
-        e.setJoinMessage(main.getJoinMessage(player));
         player.getInventory().clear();
         player.getInventory().setItem(4, main.selector);
         player.getInventory().setItem(8, main.quit);
     }
 
-
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent e) {
-        Player player = e.getPlayer();
-        e.setQuitMessage(main.getDisconnectMessage(player));
-    }
 
     @EventHandler
     public void onPlayerDrop(PlayerDropItemEvent e) {

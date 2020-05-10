@@ -22,7 +22,6 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.scheduler.BukkitTask;
-import sun.tools.jar.JarToolProvider;
 
 public class LobbyMain extends JavaPlugin implements Listener {
 
@@ -136,7 +135,7 @@ public class LobbyMain extends JavaPlugin implements Listener {
                             player.playSound(player.getLocation(), Sound.ENTITY_LLAMA_SPIT, 1.0f, .1f);
                         } else {
                             player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1.0f, 1.0f);
-                            CoreSendStringPacket.sendPacketToTitle(player, Utils.colorize(Utils.getRainbowString("Jump-and-Run")), Utils.colorize("&a in &f" + Utils.formatTimerTime(JARTimer.get(player)) + " &ageschafft!"));
+                            CoreSendStringPacket.sendPacketToTitle(player, Utils.colorize(Utils.getRainbowString("Jump-and-Run")), Utils.colorize("&a in &f" + Utils.formatTimerTime(JARTimer.get(player) / 20) + " &ageschafft!"));
                             player.teleport(new Location(Bukkit.getWorld("world"), -40, 21, 88));
                             JARTimer.put(player, -1);
                         }
@@ -158,11 +157,12 @@ public class LobbyMain extends JavaPlugin implements Listener {
                         JARTimer.remove(player);
                         cancel();
                     } else {
+                        player.spawnParticle(Particle.SPELL_WITCH, player.getLocation(), 25);
                         JARTimer.put(player, JARTimer.get(player) + 1);
-                        CoreSendStringPacket.sendPacketToHotbar(player, Utils.colorize("&0Jump-and-Run: &a" + Utils.formatTimerTime(JARTimer.get(player))));
+                        CoreSendStringPacket.sendPacketToHotbar(player, Utils.colorize("&0Jump-and-Run: &a" + Utils.formatTimerTime(JARTimer.get(player)/20)));
                     }
                 }
-            }.runTaskTimer(this, 0L, 20L);
+            }.runTaskTimer(this, 0L, 1L);
         }
 
     }

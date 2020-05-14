@@ -13,20 +13,20 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.inventory.Inventory;
 
 public class LobbyEventHandler implements Listener {
 
     LobbyMain main;
 
 
-    public LobbyEventHandler(LobbyMain main){
+    public LobbyEventHandler(LobbyMain main) {
         this.main = main;
     }
 
-    public void initialize(){
+    public void initialize() {
         Bukkit.getPluginManager().registerEvents(this, main);
     }
-
 
 
     @EventHandler
@@ -45,8 +45,6 @@ public class LobbyEventHandler implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
 
-        CoreSendStringPacket.sendPacketToTitle(e.getPlayer(), Utils.colorize("&3Moin"), Utils.colorize(e.getPlayer().getDisplayName()));
-        CoreSendStringPacket.sendPacketToHotbar(e.getPlayer(), Utils.colorize("Wilkommen auf &3PMFRTT-Networks&f!"));
 
         main.portalTimer.put(e.getPlayer().getDisplayName(), 5);
         Player player = e.getPlayer();
@@ -54,6 +52,14 @@ public class LobbyEventHandler implements Listener {
         player.getInventory().clear();
         player.getInventory().setItem(4, main.selector);
         player.getInventory().setItem(8, main.quit);
+        Bukkit.getServer().getScheduler().runTaskLater(main, new Runnable() {
+            @Override
+            public void run() {
+                CoreSendStringPacket.sendPacketToTitle(e.getPlayer(), Utils.colorize("&3Moin"), Utils.colorize(e.getPlayer().getDisplayName()));
+                CoreSendStringPacket.sendPacketToHotbar(e.getPlayer(), Utils.colorize("Wilkommen auf &3PMFRTT-Networks&f!"));
+            }
+        }, 40L);
+
     }
 
 

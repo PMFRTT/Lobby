@@ -42,6 +42,11 @@ public class LobbyMain extends JavaPlugin implements Listener {
     public void onEnable() {
 
         LobbyEventHandler lobbyEventHandler = new LobbyEventHandler(this);
+        MinigameSchiffeVersenken minigameSchiffeVersenken = new MinigameSchiffeVersenken(this);
+        LobbyCommandExecutor lobbyCommandExecutor = new LobbyCommandExecutor(this, minigameSchiffeVersenken);
+
+        getCommand("challenge").setExecutor(lobbyCommandExecutor);
+
         lobbyEventHandler.initialize();
         CoreMain.setPlugin(this);
 

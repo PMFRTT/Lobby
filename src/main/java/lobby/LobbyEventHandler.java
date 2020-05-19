@@ -92,24 +92,26 @@ public class LobbyEventHandler implements Listener {
     @EventHandler
     public void onPlayerInventoryClick(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
-        if (e.getInventory().equals(e.getClickedInventory())) {
-            if (e.getSlot() == 0) {
-                e.setCancelled(true);
-                CoreBungeeCordClient.moveToServer(player, "BingoServer");
-            } else if (e.getSlot() == 1) {
-                e.setCancelled(true);
-                CoreBungeeCordClient.moveToServer(player, "ChallengeServer");
+        if (e.getClickedInventory() != null) {
+            if (e.getClickedInventory().equals(LobbyInventory.getServerSelectorInventory())) {
+                if (e.getSlot() == 0) {
+                    e.setCancelled(true);
+                    CoreBungeeCordClient.moveToServer(player, "BingoServer");
+                } else if (e.getSlot() == 1) {
+                    e.setCancelled(true);
+                    CoreBungeeCordClient.moveToServer(player, "ChallengeServer");
 
-            } else if (e.getSlot() == 2) {
-                e.setCancelled(true);
-                CoreBungeeCordClient.moveToServer(player, "SurvivalServer");
+                } else if (e.getSlot() == 2) {
+                    e.setCancelled(true);
+                    CoreBungeeCordClient.moveToServer(player, "SurvivalServer");
 
-            } else if (e.getSlot() == 8) {
-                e.setCancelled(true);
-                CoreBungeeCordClient.moveToServer(player, "DebugServer");
+                } else if (e.getSlot() == 8) {
+                    e.setCancelled(true);
+                    CoreBungeeCordClient.moveToServer(player, "DebugServer");
 
-            } else {
-                e.setCancelled(true);
+                } else {
+                    e.setCancelled(true);
+                }
             }
 
         }

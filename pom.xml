@@ -80,7 +80,7 @@
         <dependency>
             <groupId>com.github.PMFRTT</groupId>
             <artifactId>Core</artifactId>
-            <version>master-SNAPSHOT</version>
+            <version>-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

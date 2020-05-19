@@ -44,7 +44,7 @@ public class LobbyInventory {
         } else {
             ItemStack serverPanel = new ItemStack(Material.RED_STAINED_GLASS_PANE, 1);
             ItemMeta serverPanelMeta = serverPanel.getItemMeta();
-            serverPanelMeta.setDisplayName(Utils.colorize("&c" + name));
+            serverPanelMeta.setDisplayName(Utils.colorize("&4" + name));
             ArrayList<String> Lore = new ArrayList<String>();
             Lore.add(Utils.colorize(""));
             Lore.add(Utils.colorize("&cDieser Server ist Offline"));
@@ -59,7 +59,7 @@ public class LobbyInventory {
     private static void fillEmptySlots(Inventory inventory){
         for(int i = 0; i < inventory.getSize(); i++){
             if(inventory.getItem(i) == null) {
-                ItemStack empty = new ItemStack(Material.BLACK_STAINED_GLASS_PANE,1);
+                ItemStack empty = new ItemStack(Material.GRAY_STAINED_GLASS_PANE,1);
                 ItemMeta emptyMeta = empty.getItemMeta();
                 emptyMeta.setDisplayName(Utils.colorize("&7Kein Server verfügbar!"));
                 empty.setItemMeta(emptyMeta);

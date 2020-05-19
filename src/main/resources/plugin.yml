@@ -3,3 +3,6 @@ version: ${project.version}
 main: lobby.LobbyMain
 api-version: 1.13
 depend: [Core]
+commands:
+  challenge:
+    aliases: [c]

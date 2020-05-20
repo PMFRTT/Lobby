@@ -9,11 +9,9 @@ import org.bukkit.entity.Player;
 public class LobbyCommandExecutor implements CommandExecutor {
 
     private LobbyMain main;
-    private MinigameSchiffeVersenken minigameSchiffeVersenken;
 
     public LobbyCommandExecutor(LobbyMain main, MinigameSchiffeVersenken minigameSchiffeVersenken){
         this.main = main;
-        this.minigameSchiffeVersenken = minigameSchiffeVersenken;
     }
 
     @Override
@@ -21,6 +19,7 @@ public class LobbyCommandExecutor implements CommandExecutor {
 
         if(command.getLabel().equalsIgnoreCase("challenge")){
             if(args.length == 1 && Bukkit.getPlayer(args[0]) != null){
+                MinigameSchiffeVersenken minigameSchiffeVersenken = new MinigameSchiffeVersenken(main);
                 minigameSchiffeVersenken.gameLoop((Player) sender, Bukkit.getPlayer(args[0]));
             }
 

@@ -13,7 +13,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
-import org.bukkit.inventory.Inventory;
 
 public class LobbyEventHandler implements Listener {
 
@@ -93,10 +92,11 @@ public class LobbyEventHandler implements Listener {
     public void onPlayerInventoryClick(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
         if (e.getClickedInventory() != null) {
-            if (e.getClickedInventory().equals(LobbyInventory.getServerSelectorInventory())) {
+            if (e.getClickedInventory().equals(LobbyInventory.ServerSelector)) {
                 if (e.getSlot() == 0) {
                     e.setCancelled(true);
                     CoreBungeeCordClient.moveToServer(player, "BingoServer");
+
                 } else if (e.getSlot() == 1) {
                     e.setCancelled(true);
                     CoreBungeeCordClient.moveToServer(player, "ChallengeServer");
@@ -112,8 +112,9 @@ public class LobbyEventHandler implements Listener {
                 } else {
                     e.setCancelled(true);
                 }
-            }
 
+
+            }
         }
 
     }

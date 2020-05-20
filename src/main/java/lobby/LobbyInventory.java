@@ -5,9 +5,7 @@ import core.CoreBungeeCordClient;
 import core.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -16,16 +14,15 @@ import java.util.ArrayList;
 
 public class LobbyInventory {
 
+    public static Inventory ServerSelector;
 
     public static Inventory getServerSelectorInventory() {
-        Inventory ServerSelector = Bukkit.createInventory(null, 9, org.bukkit.ChatColor.AQUA + "Serverwahl");
-
+        ServerSelector = Bukkit.createInventory(null, 9, org.bukkit.ChatColor.AQUA + "Serverwahl");
         addServerToInventory(25566, "Bingo Server", 0, ServerSelector);
         addServerToInventory(25561, "Challenge Server", 1, ServerSelector);
         addServerToInventory(25562, "Survival Server", 2, ServerSelector);
         fillEmptySlots(ServerSelector);
         return ServerSelector;
-
     }
 
     private static void addServerToInventory(int port, String name, int slot, Inventory inventory) {

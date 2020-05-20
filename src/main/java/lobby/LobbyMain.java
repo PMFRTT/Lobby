@@ -42,12 +42,13 @@ public class LobbyMain extends JavaPlugin implements Listener {
     public void onEnable() {
 
         LobbyEventHandler lobbyEventHandler = new LobbyEventHandler(this);
+        lobbyEventHandler.initialize();
+
         MinigameSchiffeVersenken minigameSchiffeVersenken = new MinigameSchiffeVersenken(this);
         LobbyCommandExecutor lobbyCommandExecutor = new LobbyCommandExecutor(this, minigameSchiffeVersenken);
 
         getCommand("challenge").setExecutor(lobbyCommandExecutor);
 
-        lobbyEventHandler.initialize();
         CoreMain.setPlugin(this);
 
 
@@ -170,16 +171,5 @@ public class LobbyMain extends JavaPlugin implements Listener {
             }.runTaskTimer(this, 0L, 1L);
         }
 
-    }
-
-
-    String getJoinMessage(Player player) {
-        String message = Utils.getJoinPrefix("Lobby", player);
-        return message;
-    }
-
-    String getDisconnectMessage(Player player) {
-        String message = Utils.getDisconnectPrefix("Lobby", player);
-        return message;
     }
 }

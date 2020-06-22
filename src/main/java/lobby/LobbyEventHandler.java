@@ -1,11 +1,12 @@
 package lobby;
 
-import core.CoreBungeeCordClient;
-import core.CoreSendStringPacket;
+import core.bungee.CoreBungeeCordClient;
+import core.core.CoreSendStringPacket;
 import core.Utils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -72,7 +73,7 @@ public class LobbyEventHandler implements Listener {
     public void onPlayerRightClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         if (p.getItemInHand().equals(main.selector)) {
-            p.openInventory(LobbyInventory.getServerSelectorInventory());
+            p.openInventory(LobbyInventory.getServerSelectorInventory(p));
         } else if (p.getItemInHand().equals(main.quit)) {
             p.kickPlayer(ChatColor.DARK_RED + "Du hast das Spiel verlassen!");
         }
@@ -86,6 +87,13 @@ public class LobbyEventHandler implements Listener {
         if (!e.getPlayer().isOp()) {
             e.setCancelled(true);
         }
+    }
+
+    @EventHandler
+    private void onSneak(PlayerToggleSneakEvent e) {
+        Player player = e.getPlayer();
+        World world = main.getServer().getWorld("world_test");
+        player.teleport(new Location(world, 0, 10, 0));
     }
 
     @EventHandler
@@ -104,6 +112,14 @@ public class LobbyEventHandler implements Listener {
                 } else if (e.getSlot() == 2) {
                     e.setCancelled(true);
                     CoreBungeeCordClient.moveToServer(player, "SurvivalServer");
+
+                } else if (e.getSlot() == 3) {
+                    e.setCancelled(true);
+                    CoreBungeeCordClient.moveToServer(player, "MobArena");
+
+                }else if(e.getSlot() == 4){
+                    e.setCancelled(true);
+                    CoreBungeeCordClient.moveToServer(player, "Skyblock");
 
                 } else if (e.getSlot() == 8) {
                     e.setCancelled(true);

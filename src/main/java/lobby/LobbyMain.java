@@ -3,9 +3,9 @@ package lobby;
 import java.util.Collection;
 import java.util.HashMap;
 
-import core.CoreBungeeCordClient;
-import core.CoreMain;
-import core.CoreSendStringPacket;
+import core.bungee.CoreBungeeCordClient;
+import core.core.CoreMain;
+import core.core.CoreSendStringPacket;
 import core.Utils;
 import org.bukkit.*;
 import org.bukkit.block.Block;

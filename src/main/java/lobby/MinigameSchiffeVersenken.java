@@ -82,13 +82,13 @@ public class MinigameSchiffeVersenken implements Listener {
 
     public void gameLoop(Player challenger, Player challenged) {
 
-        initialize();
-
         openedFields.put(challenged, new ArrayList<Integer>());
         openedFields.put(challenger, new ArrayList<Integer>());
 
         challengerPlayer = challenger;
         challengedPlayer = challenged;
+
+        initialize();
 
         challengerInventory = createChallengerInventory(challenger, challenged);
         challengedInventory = createChallengedInventory(challenged, challenger);

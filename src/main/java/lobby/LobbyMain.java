@@ -89,7 +89,7 @@ public class LobbyMain extends JavaPlugin implements Listener {
                     } else {
                         int i = playerTimer.get(p.getDisplayName());
                         i++;
-                        if (i == 99999999) {
+                        if (i == 120) {
                             playerTimer.remove(p.getDisplayName());
                             p.kickPlayer(ChatColor.GOLD + "Du warst zu lange AFK!");
                         } else {
@@ -163,7 +163,7 @@ public class LobbyMain extends JavaPlugin implements Listener {
                         JARTimer.remove(player);
                         cancel();
                     } else {
-                        player.spawnParticle(Particle.SPELL_WITCH, player.getLocation(), 25);
+                        player.spawnParticle(Particle.SPELL_WITCH, player.getLocation(), 10);
                         JARTimer.put(player, JARTimer.get(player) + 1);
                         CoreSendStringPacket.sendPacketToHotbar(player, Utils.colorize("&0Jump-and-Run: &a" + Utils.formatTimerTime(JARTimer.get(player)/20)));
                     }

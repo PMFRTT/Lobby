@@ -52,14 +52,8 @@ public class LobbyEventHandler implements Listener {
         player.getInventory().clear();
         player.getInventory().setItem(4, main.selector);
         player.getInventory().setItem(8, main.quit);
-        Bukkit.getServer().getScheduler().runTaskLater(main, new Runnable() {
-            @Override
-            public void run() {
-                CoreSendStringPacket.sendPacketToTitle(e.getPlayer(), Utils.colorize("&3Moin"), Utils.colorize(e.getPlayer().getDisplayName()));
-                CoreSendStringPacket.sendPacketToHotbar(e.getPlayer(), Utils.colorize("Wilkommen auf &3PMFRTT-Networks&f!"));
-            }
-        }, 40L);
-
+        CoreSendStringPacket.sendPacketToTitle(e.getPlayer(), Utils.colorize("&3Moin"), Utils.colorize(e.getPlayer().getDisplayName()));
+        CoreSendStringPacket.sendPacketToHotbar(e.getPlayer(), Utils.colorize("Wilkommen auf &3PMFRTT-Networks&f!"));
     }
 
 
@@ -74,8 +68,11 @@ public class LobbyEventHandler implements Listener {
         Player p = e.getPlayer();
         if (p.getItemInHand().equals(main.selector)) {
             p.openInventory(LobbyInventory.getServerSelectorInventory(p));
-        } else if (p.getItemInHand().equals(main.quit)) {
+            e.setCancelled(true);
+        }
+        if (p.getItemInHand().equals(main.quit)) {
             p.kickPlayer(ChatColor.DARK_RED + "Du hast das Spiel verlassen!");
+            e.setCancelled(true);
         }
 
     }
@@ -87,13 +84,6 @@ public class LobbyEventHandler implements Listener {
         if (!e.getPlayer().isOp()) {
             e.setCancelled(true);
         }
-    }
-
-    @EventHandler
-    private void onSneak(PlayerToggleSneakEvent e) {
-        Player player = e.getPlayer();
-        World world = main.getServer().getWorld("world_test");
-        player.teleport(new Location(world, 0, 10, 0));
     }
 
     @EventHandler
@@ -117,7 +107,7 @@ public class LobbyEventHandler implements Listener {
                     e.setCancelled(true);
                     CoreBungeeCordClient.moveToServer(player, "MobArena");
 
-                }else if(e.getSlot() == 4){
+                } else if (e.getSlot() == 4) {
                     e.setCancelled(true);
                     CoreBungeeCordClient.moveToServer(player, "Skyblock");
 

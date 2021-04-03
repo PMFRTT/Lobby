@@ -3,23 +3,15 @@ package lobby;
 import core.core.CoreMain;
 import lobby.jumpandrun.JumpAndRun;
 import lobby.jumpandrun.JumpAndRunHandler;
+import lobby.servers.ServersInventory;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
-import net.md_5.bungee.api.ChatColor;
+import java.util.Objects;
 
 public class LobbyMain extends JavaPlugin implements Listener {
-
-    public static ItemStack selector = new ItemStack(Material.COMPASS, 1);
-    public static ItemMeta meta = selector.getItemMeta();
-
-    public static ItemStack quit = new ItemStack(Material.BARRIER, 1);
-    public static ItemMeta quitMeta = quit.getItemMeta();
 
     public static JumpAndRun jumpAndRun;
     public static JumpAndRunHandler jumpAndRunHandler;
@@ -28,6 +20,7 @@ public class LobbyMain extends JavaPlugin implements Listener {
 
         CoreMain.setPlugin(this);
         prepareJumpAndRun();
+        ServersInventory.init();
 
         LobbyEventHandler lobbyEventHandler = new LobbyEventHandler(this);
         lobbyEventHandler.initialize();
@@ -35,14 +28,7 @@ public class LobbyMain extends JavaPlugin implements Listener {
         MinigameSchiffeVersenken minigameSchiffeVersenken = new MinigameSchiffeVersenken(this);
         LobbyCommandExecutor lobbyCommandExecutor = new LobbyCommandExecutor(this, minigameSchiffeVersenken);
 
-        getCommand("challenge").setExecutor(lobbyCommandExecutor);
-
-        meta.setDisplayName(ChatColor.AQUA + "Serverwahl");
-        selector.setItemMeta(meta);
-
-        quitMeta.setDisplayName(ChatColor.DARK_RED + "Quit");
-        quit.setItemMeta(quitMeta);
-
+        Objects.requireNonNull(getCommand("challenge")).setExecutor(lobbyCommandExecutor);
     }
 
     private void prepareJumpAndRun(){

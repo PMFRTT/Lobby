@@ -24,6 +24,7 @@ public class LobbyInventory {
         addServerToInventory(25562, "Survival Server", 2, ServerSelector, player);
         addServerToInventory(25564, "Mobarena", 3, ServerSelector, player);
         addServerToInventory(25559, "Skyblock", 4, ServerSelector, player);
+        addServerToInventory(25000, "Modpack", 8, ServerSelector, player);
         fillEmptySlots(ServerSelector);
         return ServerSelector;
     }
@@ -31,7 +32,7 @@ public class LobbyInventory {
     private static void addServerToInventory(int port, String name, int slot, Inventory inventory, Player player) {
 
         if (CoreBungeeCordClient.isOnline(port)) {
-            CoreBungeeCordClient.getPlayerAmount(port, player);
+            CoreBungeeCordClient.getPlayerAmount(String.valueOf(port), player);
             ItemStack serverPanel = new ItemStack(Material.LIME_STAINED_GLASS_PANE, 1);
             ItemMeta serverPanelMeta = serverPanel.getItemMeta();
             serverPanelMeta.setDisplayName(Utils.colorize("&2" + name));

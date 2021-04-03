@@ -1,6 +1,7 @@
 package lobby;
 
 import core.bungee.CoreBungeeCordClient;
+import core.core.CoreMain;
 import core.core.CoreSendStringPacket;
 import core.Utils;
 import net.md_5.bungee.api.ChatColor;
@@ -28,13 +29,6 @@ public class LobbyEventHandler implements Listener {
         Bukkit.getPluginManager().registerEvents(this, main);
     }
 
-
-    @EventHandler
-    public void onPlayerMove(PlayerMoveEvent e) {
-        Player p = e.getPlayer();
-        main.playerTimer.remove(p.getDisplayName());
-    }
-
     @EventHandler
     public void onPlayerDamage(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player) {
@@ -44,16 +38,14 @@ public class LobbyEventHandler implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
-
-
-        main.portalTimer.put(e.getPlayer().getDisplayName(), 5);
+        LobbyMain.jumpAndRun.addPlayerTimer(e.getPlayer());
         Player player = e.getPlayer();
         player.teleport(new Location(Bukkit.getWorld("world"), -40, 21, 88));
         player.getInventory().clear();
-        player.getInventory().setItem(4, main.selector);
-        player.getInventory().setItem(8, main.quit);
-        CoreSendStringPacket.sendPacketToTitle(e.getPlayer(), Utils.colorize("&3Moin"), Utils.colorize(e.getPlayer().getDisplayName()));
-        CoreSendStringPacket.sendPacketToHotbar(e.getPlayer(), Utils.colorize("Wilkommen auf &3PMFRTT-Networks&f!"));
+        player.getInventory().setItem(4, LobbyMain.selector);
+        player.getInventory().setItem(8, LobbyMain.quit);
+        CoreSendStringPacket.sendPacketToTitle(e.getPlayer(), Utils.colorize("&3Moin&f " + e.getPlayer().getDisplayName()), Utils.colorize(""));
+        CoreSendStringPacket.sendPacketToHotbar(e.getPlayer(), Utils.colorize("Willkommen auf &3PMFRTT-Networks&f!"));
     }
 
 
@@ -79,8 +71,6 @@ public class LobbyEventHandler implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
-
-
         if (!e.getPlayer().isOp()) {
             e.setCancelled(true);
         }
@@ -93,16 +83,13 @@ public class LobbyEventHandler implements Listener {
             if (e.getClickedInventory().equals(LobbyInventory.ServerSelector)) {
                 if (e.getSlot() == 0) {
                     e.setCancelled(true);
-                    CoreBungeeCordClient.moveToServer(player, "BingoServer");
-
+                    CoreBungeeCordClient.moveToServer(player, "BINGOSERVER");
                 } else if (e.getSlot() == 1) {
                     e.setCancelled(true);
-                    CoreBungeeCordClient.moveToServer(player, "ChallengeServer");
-
+                    CoreBungeeCordClient.moveToServer(player, "CHALLENGESERVER");
                 } else if (e.getSlot() == 2) {
                     e.setCancelled(true);
-                    CoreBungeeCordClient.moveToServer(player, "SurvivalServer");
-
+                    CoreBungeeCordClient.moveToServer(player, "SURVIVALSERVER");
                 } else if (e.getSlot() == 3) {
                     e.setCancelled(true);
                     CoreBungeeCordClient.moveToServer(player, "MobArena");
@@ -113,7 +100,7 @@ public class LobbyEventHandler implements Listener {
 
                 } else if (e.getSlot() == 8) {
                     e.setCancelled(true);
-                    CoreBungeeCordClient.moveToServer(player, "DebugServer");
+                    CoreBungeeCordClient.moveToServer(player, "Modpack");
 
                 } else {
                     e.setCancelled(true);

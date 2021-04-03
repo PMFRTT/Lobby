@@ -6,7 +6,7 @@
 
     <groupId>Lobby</groupId>
     <artifactId>Lobby</artifactId>
-    <version>16.5.10</version>
+    <version>16.5.10-dev</version>
     <packaging>jar</packaging>
 
     <name>Lobby</name>

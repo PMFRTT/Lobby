@@ -10,7 +10,6 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import java.time.LocalDate;
 
 public class JumpAndRunTimer extends Timer {
 

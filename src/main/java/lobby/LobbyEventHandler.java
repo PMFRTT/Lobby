@@ -43,6 +43,7 @@ public class LobbyEventHandler implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         LobbyMain.jumpAndRun.addPlayerTimer(e.getPlayer());
+        LobbyMain.jumpAndRun.getPlayerTimer(e.getPlayer()).setCheckPoint(); // fixed #4
         Player player = e.getPlayer();
         player.teleport(new Location(Bukkit.getWorld("world"), -40, 21, 88));
         player.getInventory().clear();

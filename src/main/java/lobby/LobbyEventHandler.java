@@ -13,6 +13,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -63,8 +64,10 @@ public class LobbyEventHandler implements Listener {
     public void onPlayerRightClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         if (p.getItemInHand().equals(ServersInventory.selector)) {
-            p.openInventory(ServersInventory.buildServerInventory());
-            e.setCancelled(true);
+            if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+                p.openInventory(ServersInventory.buildServerInventory());
+                e.setCancelled(true);
+            }
         }
     }
 
@@ -77,7 +80,7 @@ public class LobbyEventHandler implements Listener {
 
     @EventHandler
     public void onPlayerInventoryClick(InventoryClickEvent e) {
-        if (e.getClickedInventory().equals(ServersInventory.buildServerInventory())) {
+        if (Objects.equals(e.getClickedInventory(), ServersInventory.getServerInventory())) {
             if (e.getCurrentItem() != null) {
                 Server server = new Server(ChatColor.stripColor(Objects.requireNonNull(e.getCurrentItem().getItemMeta()).getDisplayName()), CoreMain.mySQLBungee.getPort(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName())), CoreMain.mySQLBungee.getVersion(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName())));
                 server.connect((Player) e.getWhoClicked());

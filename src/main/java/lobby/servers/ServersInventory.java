@@ -23,6 +23,7 @@ public class ServersInventory {
     public static void init() {
         selectorItemMeta.setDisplayName(ChatColor.AQUA + "Serverwahl");
         selector.setItemMeta(selectorItemMeta);
+        buildServerInventory();
     }
 
     public static Inventory buildServerInventory() {
@@ -42,6 +43,10 @@ public class ServersInventory {
                 i++;
             }
         }
+        return serverInventory;
+    }
+
+    public static Inventory getServerInventory(){
         return serverInventory;
     }
 

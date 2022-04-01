@@ -6,7 +6,7 @@
 
     <groupId>Lobby</groupId>
     <artifactId>Lobby</artifactId>
-    <version>16.5.11</version>
+    <version>18.2.0-dev</version>
     <packaging>jar</packaging>
 
     <name>Lobby</name>
@@ -69,16 +69,16 @@
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.16.5-R0.1-SNAPSHOT</version>
+            <artifactId>spigot</artifactId>
+            <version>1.18.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.PMFRTT</groupId>
             <artifactId>Core</artifactId>
-            <version>16.5.1.1</version>
+            <version>18.2.0-dev</version>
             <scope>system</scope>
-            <systemPath>C:\Code\Java\Bukkit\Core\target\Core.jar</systemPath>
+            <systemPath>C:\Code\Java\Bukkit\Core\target\Core-18.2.0-dev.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

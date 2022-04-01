@@ -19,6 +19,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 
+import java.net.ServerSocket;
 import java.util.Objects;
 
 public class LobbyEventHandler implements Listener {
@@ -87,8 +88,22 @@ public class LobbyEventHandler implements Listener {
             }
             e.setCancelled(true);
         }
+    }
 
-
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent e){
+        Player player = e.getPlayer();
+        Server server;
+        switch(player.getLocation().add(0, -1, 0).getBlock().getType()){
+            case HAY_BLOCK:
+                server = new Server("BINGOSERVER", 25566, "1.16.5");
+                server.connect(player);
+                break;
+            case QUARTZ_PILLAR:
+                server = new Server("CHALLENGESERVER", 25561, "1.16.5");
+                server.connect(player);
+                break;
+        }
     }
 
 }

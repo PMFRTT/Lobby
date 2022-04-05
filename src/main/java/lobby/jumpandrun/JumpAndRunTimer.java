@@ -3,7 +3,6 @@ package lobby.jumpandrun;
 import core.Utils;
 import core.core.CoreMain;
 import core.core.CoreSendStringPacket;
-import core.currency.Currency;
 import core.timer.Timer;
 import core.timer.TimerType;
 import org.bukkit.Bukkit;

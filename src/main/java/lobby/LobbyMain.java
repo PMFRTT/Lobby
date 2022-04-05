@@ -1,5 +1,6 @@
 package lobby;
 
+import core.core.CoreHandler;
 import core.core.CoreMain;
 import lobby.jumpandrun.JumpAndRun;
 import lobby.jumpandrun.JumpAndRunHandler;
@@ -18,7 +19,7 @@ public class LobbyMain extends JavaPlugin implements Listener {
 
     public void onEnable() {
 
-        CoreMain.setPlugin(this);
+        CoreHandler.setGuestPlugin(this);
         prepareJumpAndRun();
         ServersInventory.init();
 

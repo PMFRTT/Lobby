@@ -1,6 +1,8 @@
 package lobby.servers;
 
 import core.Utils;
+import core.bungee.BungeeHandler;
+import core.bungee.CoreBungeeCordClient;
 import core.bungee.Server;
 import core.core.CoreMain;
 import net.md_5.bungee.api.ChatColor;
@@ -27,7 +29,7 @@ public class ServersInventory {
     }
 
     public static Inventory buildServerInventory() {
-        ArrayList<Server> servers = CoreMain.mySQLBungee.getServers();
+        ArrayList<Server> servers = BungeeHandler.getDataset().getServers();
         int i = 0;
         for (Server server : servers) {
             if (!server.getName().equals("LOBBYSERVER")) {

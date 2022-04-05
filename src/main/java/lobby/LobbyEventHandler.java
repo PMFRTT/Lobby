@@ -1,15 +1,14 @@
 package lobby;
 
+import core.bungee.BungeeHandler;
 import core.bungee.CoreBungeeCordClient;
 import core.bungee.Server;
-import core.core.CoreMain;
 import core.core.CoreSendStringPacket;
 import core.Utils;
 import lobby.servers.ServersInventory;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,7 +18,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 
-import java.net.ServerSocket;
 import java.util.Objects;
 
 public class LobbyEventHandler implements Listener {
@@ -83,7 +81,7 @@ public class LobbyEventHandler implements Listener {
     public void onPlayerInventoryClick(InventoryClickEvent e) {
         if (Objects.equals(e.getClickedInventory(), ServersInventory.getServerInventory())) {
             if (e.getCurrentItem() != null) {
-                Server server = new Server(ChatColor.stripColor(Objects.requireNonNull(e.getCurrentItem().getItemMeta()).getDisplayName()), CoreMain.mySQLBungee.getPort(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName())), CoreMain.mySQLBungee.getVersion(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName())));
+                Server server = new Server(ChatColor.stripColor(Objects.requireNonNull(e.getCurrentItem().getItemMeta()).getDisplayName()), BungeeHandler.getDataset().getPort(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName())), BungeeHandler.getDataset().getVersion(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName())));
                 server.connect((Player) e.getWhoClicked());
             }
             e.setCancelled(true);
